@@ -5,11 +5,12 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { Avatar, CardHeader, IconButton } from '@material-ui/core';
+import { Avatar, CardHeader, IconButton} from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import ShareIcon from '@material-ui/icons/Share'
 import ThumbsupIcon from '@material-ui/icons/ThumbUp'
 import ThumbsdownIcom from '@material-ui/icons/ThumbDown'
+import {Link} from 'react-router-dom'
 
 
 const useStyles = makeStyles({
@@ -23,7 +24,11 @@ const useStyles = makeStyles({
     transform: 'scale(0.8)',
   },
   title: {
-    fontSize: 14,
+    fontSize: 22,
+    "&:hover":{
+      cursor: "pointer",
+      color: "blue"
+    }
   },
   pos: {
     marginBottom: 12,
@@ -46,6 +51,10 @@ const useStyles = makeStyles({
   },
   unselect:{
 
+  },
+  route:{
+    textDecoration:"inherit",
+    color:"inherit"
   }
 });
 
@@ -55,18 +64,22 @@ export default function SimpleCard({postDetail, onFavourite, onLike, onDisLike})
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Typography variant="h5" component="h1">
+        <Link to={`/blogs/${postDetail.id}`} className={classes.route}>
+        <Typography className={classes.title} variant="h5" component="h2">
           {postDetail.title}
         </Typography>
+        </Link>
         <Typography className={classes.pos} color="textSecondary">
           {postDetail.author} | {postDetail.createdOn}
         </Typography>
         <Typography variant="body1" component="p">
           {postDetail.description}
         </Typography>
+        <Link to={`/blogs/${postDetail.id}`} className={classes.route}>
         <Typography variant="body2" component="p" className={classes.link}>
           Read More
         </Typography>
+        </Link>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton className = {postDetail.isFav ? classes.isFav : classes.notFav} 

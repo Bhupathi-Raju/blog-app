@@ -6,7 +6,7 @@ import {makeStyles} from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
     gridContainer : {
-        display:"flex",
+        display:"block",
         flexDirection: "column",
         width: "50%",
         margin: "0",
@@ -16,61 +16,29 @@ const useStyles = makeStyles({
     },
 });
 
-
-const postDetailsJSON = {
-    posts:[{
-        id:1,
-        author:"Raju",
-        title:"The Print, The Book, The Screen",
-        createdOn: "24th Jan 2020",
-        description: "Advice to aspiring photographers on understanding the workings of the art market. “Photographs have no meaning on their own. They take on some meaning through the way they are produced and used. They also take on a value or aura based on what carrier they appear on. In the world of photography, the value is almost entirely based on commerce and on a generally unspoken and widely shared sense of elitism. If you want to show your photographs to someone, you will have to think about how to do that”",
-        likes: 123,
-        disLikes: 12,
-        isFav : false,
-        likeStatus: 0
-    },
-    {
-        id:2,
-        author:"Bhupathi",
-        title:"Taking the plunge",
-        createdOn: "25th Jan 2020",
-        description: "Ridiculously enjoyable essay about the history and culture of swimming. Never a dull sentence. “The world high-dive record is still held by Alick Wickham, a Solomon Islander who in 1918 dived 205 feet 9 inches from a cliff above the Yarra River in South Australia. He was not so much bothered by the height or water depth as by the chances of hitting the opposite bank. He was successful, although his bathing costumes were ripped off by the impact and he lay in a coma for a week”",
-        likes: 12,
-        disLikes: 1,
-        isFav : true,
-        likeStatus: 1
-    },
-    {
-        id:3,
-        author:"Bhupathi",
-        title:"Taking the plunge",
-        createdOn: "25th Jan 2020",
-        description: "Ridiculously enjoyable essay about the history and culture of swimming. Never a dull sentence. “The world high-dive record is still held by Alick Wickham, a Solomon Islander who in 1918 dived 205 feet 9 inches from a cliff above the Yarra River in South Australia. He was not so much bothered by the height or water depth as by the chances of hitting the opposite bank. He was successful, although his bathing costumes were ripped off by the impact and he lay in a coma for a week”",
-        likes: 12,
-        disLikes: 1,
-        isFav : true,
-        likeStatus: 0
-    },
-    {
-        id:4,
-        author:"Raju",
-        title:"The Print, The Book, The Screen",
-        createdOn: "24th Jan 2020",
-        description: "Advice to aspiring photographers on understanding the workings of the art market. “Photographs have no meaning on their own. They take on some meaning through the way they are produced and used. They also take on a value or aura based on what carrier they appear on. In the world of photography, the value is almost entirely based on commerce and on a generally unspoken and widely shared sense of elitism. If you want to show your photographs to someone, you will have to think about how to do that”",
-        likes: 123,
-        disLikes: 12,
-        isFav : false,
-        likeStatus: 2
-    }
-]
-}
  
-export default function GridView(){
-    const [postDetails, setPostDetails] = useState([]);
-    
-    useEffect(()=>{
-        setPostDetails(postDetailsJSON.posts)
-    });
+export default function GridView({postDetails, postChangeCallback}){
+    // const [postDetails, setPostDetails] = useState([]);
+    // console.log("id", postId)
+    // useEffect(()=>{
+    //     if(postId && postDetails.length === 0){
+    //             const singlePostArray = postDetails.filter(post => post.id === postId)
+    //             setPostDetails(singlePostArray)
+    //             console.log("single", singlePostArray)
+    //         }
+    //     if(postDetails.length === 0){
+    //         setPostDetails(postDetailsJSON.posts)
+    //     }
+        // else if(postId && postDetails.length === 0){
+        //     const singlePostArray = postDetails.filter(post => post.id === postId)
+        //     setPostDetails(singlePostArray)
+        //     console.log("single", postDetails)
+        // }
+    // });
+
+    // function savetoLocal(postDetails){
+    //     localStorage.setItem('posts', JSON.stringify(posts));
+    // }
 
     function onFavourited(id){
         const updatedPostDetails = postDetails.map(postDetail => {
@@ -79,7 +47,8 @@ export default function GridView(){
             }
             return postDetail
         })
-        setPostDetails(updatedPostDetails)
+        // savetoLocal(updatedPostDetails)
+        postChangeCallback(updatedPostDetails)
     }
 
     function onLike(id){
@@ -91,7 +60,8 @@ export default function GridView(){
             }
             return postDetail
         })
-        setPostDetails(updatedPostDetails)
+        // savetoLocal(updatedPostDetails)
+        postChangeCallback(updatedPostDetails)
     }
 
     function onDisLike(id){
@@ -103,7 +73,8 @@ export default function GridView(){
             }
             return postDetail
         })
-        setPostDetails(updatedPostDetails)
+        // savetoLocal(updatedPostDetails)
+        postChangeCallback(updatedPostDetails)
     }
     
 

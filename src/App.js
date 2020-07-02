@@ -10,6 +10,9 @@ import Header from './components/molecules/Header'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import LoginForm from './components/organisms/LoginForm'
 import CreatePostButton from './components/atoms/CreatePostButton'
+import HomePage from './components/pages/HomePage'
+import SinglePostPage from './components/pages/SinglePostPage'
+import CreatePost from './components/organisms/CreatePost'
 // import styled from 'styled-components'
 
 const bodyStyle = makeStyles({
@@ -26,18 +29,6 @@ const bodyStyle = makeStyles({
     }
   );
 
-//   const StyledHeader = styled(Header)`
-//   position: sticky;
-//   top:0;
-//   z-index: 100;
-//   padding: 10px;
-//   text-align: center;
-//   color: white;
-//   fontSize: 22px;
-//   background:black;
-//   margin:0;
-//   `;
-
   const LoginButton = styled(Button)`
   position:absolute;
   right: 20px;
@@ -53,25 +44,17 @@ const bodyStyle = makeStyles({
   text-color: white;
   `;
 
-  const StyledFab = styled.div`
-    position: sticky;
-    top:1;
-    z-index: 100;
-    fontSize: 22px;
-    margin:0;
-  `;
- 
 export default function App(){
-    const classes = bodyStyle();
     return(
     <Router>
-        {/* <LoginForm/> */}
         <div>
-            <Header isLoggedIn = {true}/>
-            <GridView/>
-            <StyledFab>
-                <CreatePostButton isLoggedIn = {true}/>
-            </StyledFab>
+        <Header/>
+        <Switch>
+        <Route path="/" exact component = {HomePage}/>
+        <Route path="/login" component = {LoginForm}/>
+        <Route path="/createblog" component={CreatePost}/>
+        <Route path="/blogs/:id" component={SinglePostPage}/>
+        </Switch>
         </div>
     </Router>
     );
